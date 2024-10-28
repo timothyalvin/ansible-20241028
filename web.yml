@@ -1,0 +1,19 @@
+---
+- name: play to install IIS
+  hosts: webservers
+  tasks:
+    - name: install IIS feature
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+
+    - name: start the IIS service
+      ansible.windows.win_service:
+        name: W3Svc
+        state: started
+        start_mode: auto
+
+    - name: copy out content
+      ansible.windows.win_copy:
+        content: Hello World
+        dest: c:\inetpub\wwwroot\index.html
