@@ -21,3 +21,17 @@
           From Tex"as
           Whe're it is still "too warm
         dest: c:\inetpub\wwwroot\index.html
+
+- name: Play to test
+  tasks:
+    - name: Test connectivity
+      ansible.windows.win_uri:
+        url: http://win1.example.com
+  hosts: database
+
+- name: Test from the control node
+  hosts: localhost
+  tasks:
+    - name: Test from this linux container
+      ansible.builtin.uri:
+        url: http://win1.example.com
