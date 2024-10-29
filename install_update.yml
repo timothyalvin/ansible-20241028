@@ -28,7 +28,7 @@
         state: present
 
     - name: run an update
-      ansible.windows.win_update:
+      ansible.windows.win_updates:
         state: installed
         accept_list:
           - 890830
