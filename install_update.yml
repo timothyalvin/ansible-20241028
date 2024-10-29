@@ -1,0 +1,37 @@
+---
+- name: install and update
+  hosts: Windows
+  tasks:
+    - name: download 7-zip
+      ansible.windows.win_get_url:
+        url: https://www.7-zip.org/a/7z1900-x64.msi
+        dest: c:\windows\temp\
+
+    - name: install that MSI package
+      ansible.windows.win_package:
+        path: c:\windows\temp\7z1900-x64.msi
+        state: present
+
+    - name: install a windows feature
+      ansible.windows.win_feature:
+        name: Telnet-Client
+        state: present
+      register: installresult
+
+    - name: reboot if needed
+      ansible.windows.win_reboot:
+      when: installresult.reboot_required
+
+    - name: install zoom
+      chocolatey.chocolatey.win_chocolatey:
+        name: zoom
+        state: present
+
+    - name: run an update
+      ansible.windows.win_update:
+        state: installed
+        accept_list:
+          - 890830
+          - 5038282
+        reboot: true
+        
