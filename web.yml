@@ -32,11 +32,19 @@
         dest: c:\inetpub\wwwroot\{{ web_index }}
 
 - name: Play to test
+  hosts: database
   tasks:
     - name: Test connectivity
       ansible.windows.win_uri:
         url: http://win1.example.com
-  hosts: database
+        return_content: true
+      register: uriresult
+
+    - name: put that content in c:\windows\temp
+      ansible.windows.win_copy:
+        content: '{{ uriresult["content"] }}'
+        dest: c:\windows\temp\result.txt
+    
 
 - name: Test from the control node
   hosts: localhost
