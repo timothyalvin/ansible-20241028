@@ -4,16 +4,35 @@
   tasks:
     - name: install IIS feature
       ansible.windows.win_feature:
-        name: Web-Server
+        name: >
+          Web-Server
         state: present
 
     - name: start the IIS service
       ansible.windows.win_service:
-        name: W3Svc
-        state: started
+        name: "W3Svc"
+        state: 'started'
         start_mode: auto
 
     - name: copy out content
       ansible.windows.win_copy:
-        content: Hello World
+        content: |
+          'Hell'o World
+          From Tex"as
+          Whe're it is still "too warm
         dest: c:\inetpub\wwwroot\index.html
+
+- name: play to test
+  tasks:
+    - name: test connectivity
+      ansible.windows.win_uri:
+        url: http://win1.example.com
+  hosts: database
+
+
+- name: test from the control node
+  hosts: localhost
+  tasks:
+    - name: test from this linux container
+      ansible.builtin.uri:
+        url: http://win1.example.com
