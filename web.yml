@@ -1,26 +1,35 @@
 ---
+- name: Play to show variables
+  hosts: Windows
+  gather_facts: false
+  tasks:
+    - name: Show web content variables
+      ansible.builtin.debug:
+        var: web_content
+
 - name: Play to install IIS
   hosts: webservers
+  vars:
+    web_service: W3Svc
+    web_feature: Web-Server
+    web_index: index.html
   tasks:
     - name: Install IIS feature
       ansible.windows.win_feature:
         name: >
-          Web-Server
+          {{ web_feature }}
         state: present
 
     - name: Start the IIS service
       ansible.windows.win_service:
-        name: "W3Svc"
+        name: "{{ web_service }}"
         state: 'started'
         start_mode: auto
 
     - name: Copy out content
       ansible.windows.win_copy:
-        content: |
-          'Hell'o World
-          From Tex"as
-          Whe're it is still "too warm
-        dest: c:\inetpub\wwwroot\index.html
+        content: '{{ web_content }}'
+        dest: c:\inetpub\wwwroot\{{ web_index }}
 
 - name: Play to test
   tasks:
