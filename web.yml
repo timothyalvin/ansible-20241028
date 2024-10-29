@@ -14,6 +14,9 @@
     web_feature: Web-Server
     web_index: index.html
   tasks:
+    - name: gather disk facts
+      community.windows.win_disk_facts:
+
     - name: Install IIS feature
       ansible.windows.win_feature:
         name: >
@@ -28,7 +31,14 @@
 
     - name: Copy out content
       ansible.windows.win_copy:
-        content: '{{ web_content }}'
+        content: |
+          {{ web_content }}
+          The OS is {{ ansible_facts['os_name'] }}
+          Memory on this system {{ ansible_facts.memtotal_mb }}
+          Memory on this system {{ ansible_memtotal_mb }}
+          First IP address {{ ansible_facts['ip_addresses'][0] }}
+          First disk size {{ ansible_facts.disks[0].size }}
+          Inventory hostname is {{ inventory_hostname }}
         dest: c:\inetpub\wwwroot\{{ web_index }}
 
 - name: Play to test
@@ -36,7 +46,7 @@
   tasks:
     - name: Test connectivity
       ansible.windows.win_uri:
-        url: http://win1.example.com
+        url: http://{{ hostvars['win1.example.com']['ansible_facts']['ip_addresses'][0] }}
         return_content: true
       register: uriresult
 
