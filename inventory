@@ -1,6 +1,6 @@
 [Windows]
-win1.example.com web_content='Value from inventory'
-win2.example.com web_content='Value for win2'
+win1.example.com
+win2.example.com
 
 [webservers]
 win1.example.com
