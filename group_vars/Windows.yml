@@ -21,4 +21,8 @@ registry_values_to_set:
     valueData: 0
     performanceAffecting: false
 sql_action: Install
-
+features:
+  - SQL
+  - AS
+  - IS
+  - NS

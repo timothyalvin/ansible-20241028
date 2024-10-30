@@ -1,9 +1,14 @@
+; {{ ansible_managed }}
 ; Microsoft SQL Server Configuration file
 [OPTIONS]
 ; Specifies a Setup work flow, like INSTALL, UNINSTALL, or UPGRADE.
 ; This is a required parameter.
 ACTION="{{ sql_action }}"
+{% if ansible_facts.fqdn == 'win1.example.com' %}
+This text would only appear on win1
+on win2 it's missing
+{% endif %}
 ; Specifies features to install, uninstall, or upgrade.
 ; The list of top-level features include SQL, AS, and IS.
 ; The SQL feature will install the database engine, replication, and full-text.
-FEATURES=SQL
+FEATURES={% for feature in features %} {{ feature }}   {% endfor %}
