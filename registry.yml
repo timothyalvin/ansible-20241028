@@ -4,15 +4,11 @@
   tasks:
     - name: update both values
       ansible.windows.win_regedit:
-        path: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
-        name: '{{ item }}'
-        data: 0
-        type: dword
-      loop:
-        - NoWarningNoElevationOnInstall
-        - UpdatePromptSettings
-        - AnotherMadeUpValue
-        - FourthFakeValue
+        path: '{{ item.keyPath }}'
+        name: '{{ item.valueName }}'
+        data: '{{ item.valueData }}'
+        type: '{{ item.valueType }}'
+      loop: '{{ registry_values_to_set }}'
       register: loopresult
 
     - name: pull a registry value

@@ -1,0 +1,19 @@
+---
+registry_values_to_set:
+  - valueName: NoWarningNoElevationOnInstall
+    keyPath: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+    valueType: dword
+    valueData: 0
+  - valueName: UpdatePromptSettings
+    keyPath: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
+    valueType: dword
+    valueData: 0
+  - valueName: FeatureSettingsOverride
+    keyPath: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
+    valueType: dword
+    valueData: 0
+  - valueName: FeatureSettingsOverrideMask
+    keyPath: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
+    valueType: dword
+    valueData: 3
+
