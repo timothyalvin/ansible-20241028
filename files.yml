@@ -7,6 +7,11 @@
         path: c:\demo\demosubdir
         state: directory
 
+    - name: template out ConfigurationFile.ini
+      ansible.windows.win_template:
+        src: templates/ConfigurationFile.ini.j2
+        dest: c:\demo\ConfigurationFile.ini
+
     - name: copy over a file
       ansible.windows.win_copy:
         src: files/hello.txt

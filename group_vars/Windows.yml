@@ -20,5 +20,5 @@ registry_values_to_set:
     valueType: dword
     valueData: 0
     performanceAffecting: false
-
+sql_action: Install
 
