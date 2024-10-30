@@ -1,0 +1,48 @@
+---
+- name: file manipulation
+  hosts: Windows
+  tasks:
+    - name: create a folder
+      ansible.windows.win_file:
+        path: c:\demo\demosubdir
+        state: directory
+
+    - name: copy over a file
+      ansible.windows.win_copy:
+        src: files/hello.txt
+        dest: c:\Demo\hello.txt
+
+    - name: copy from one file to another
+      ansible.windows.win_copy:
+        src: c:\demo\Hello.txt
+        dest: c:\demo\clone.txt
+        remote_src: true
+
+    - name: check owner of a file
+      ansible.windows.win_stat:
+        path: c:\demo\clone.txt
+      register: statresult
+
+    - name: show owner of that
+      ansible.builtin.debug:
+        var: statresult.stat.owner
+
+    - name: set the owner to something
+      ansible.windows.win_owner:
+        path: c:\demo\clone.txt
+        user: student@EXAMPLE.COM
+    
+    - name: set an acl
+      ansible.windows.win_acl:
+        path: c:\demo\clone.txt
+        user: Administrators
+        rights: Modify
+        type: allow
+        state: present
+    
+    - name: add a line to a text file
+      ansible.windows.win_lineinfile:
+        path: c:\windows\system32\drivers\etc\hosts
+        line: 1.2.3.4   timserver.example.com
+        state: present
+
