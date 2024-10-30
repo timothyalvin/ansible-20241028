@@ -14,11 +14,11 @@ registry_values_to_set:
     keyPath: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
     valueType: dword
     valueData: 0
-    performanceAffecting: true
+    performanceAffecting: false
   - valueName: FeatureSettingsOverrideMask
     keyPath: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
     valueType: dword
-    valueData: 3
-    performanceAffecting: true
+    valueData: 0
+    performanceAffecting: false
 
 

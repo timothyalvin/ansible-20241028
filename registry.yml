@@ -10,6 +10,7 @@
         type: '{{ item.valueType }}'
       loop: '{{ registry_values_to_set }}'
       when: not item.performanceAffecting
+      notify: reboot the server
 
     - name: pull a registry value
       ansible.windows.win_reg_stat:
@@ -20,6 +21,7 @@
         - ansible_facts.os_name == "Microsoft Windows Server 2019 Datacenter"
         - ansible_facts.memtotal_mb > 1024
         - '"Server 2019" in ansible_facts.os_name'
+      notify: reboot the server
 
     - name: show that value
       ansible.builtin.debug:
@@ -27,3 +29,7 @@
       when: >
         "Server 2019" in ansible_facts.os_name
         or "Server 2022" in ansible_facts.os_name
+
+  handlers:
+    - name: reboot the server
+      ansible.windows.win_reboot:
