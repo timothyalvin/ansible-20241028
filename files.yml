@@ -41,7 +41,7 @@
         state: present
     
     - name: add a line to a text file
-      ansible.windows.win_lineinfile:
+      community.windows.win_lineinfile:
         path: c:\windows\system32\drivers\etc\hosts
         line: 1.2.3.4   timserver.example.com
         state: present
