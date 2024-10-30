@@ -1,6 +1,7 @@
 ---
 - name: registry update
   hosts: Windows
+  force_handlers: true
   tasks:
     - name: update both values
       ansible.windows.win_regedit:
@@ -33,3 +34,7 @@
   handlers:
     - name: reboot the server
       ansible.windows.win_reboot:
+
+  post_tasks:
+    - name: run at the end
+      ansible.windows.win_ping:

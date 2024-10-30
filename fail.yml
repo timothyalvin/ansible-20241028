@@ -1,0 +1,61 @@
+---
+- name: fail demo
+  hosts: Windows
+  tasks:
+    - name: stop an old service
+      ansible.windows.win_service:
+        name: OldSecurityProduct
+        state: stopped
+        start_mode: disabled
+      ignore_errors: true
+
+    - name: fail if Web-Server feature not available
+      ansible.windows.win_shell: Get-WindowsFeature
+      register: featureresult
+      failed_when: >
+        "Web-Server" not in featureresult.stdout
+      changed_when: false
+
+    - name: fail if not enough memory
+      ansible.builtin.fail:
+        msg: Not enough memory
+      when: ansible_facts.memtotal_mb < 512
+
+    - name: block of tasks to download 7-zip
+      block:
+        - name: task to download
+          ansible.windows.win_get_url:
+            url: http://fake.url/needs/to/fail
+            dest: c:\windows\temp\7-zip.msi
+
+        - name: print a message
+          ansible.builtin.debug:
+            msg: hello from no place
+
+      rescue:
+        - name: try the mirror
+          ansible.windows.win_get_url:
+            url: https://www.7-zip.org/a/7z1900-x64.msi
+            dest: c:\windows\temp\7-zip.msi
+
+        - name: another task
+          ansible.windows.win_ping:
+
+      always:
+        - name: delete the file
+          ansible.windows.win_file:
+            path: c:\windows\temp\7-zip.msi
+            state: absent
+  
+    - name: subsequent task
+      ansible.windows.win_ping:
+
+        
+
+
+
+
+    
+
+
+    

@@ -13,6 +13,7 @@
     web_service: W3Svc
     web_feature: Web-Server
     web_index: index.html
+  max_fail_percentage: 50
   tasks:
     - name: gather disk facts
       community.windows.win_disk_facts:
