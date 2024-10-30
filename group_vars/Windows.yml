@@ -4,16 +4,21 @@ registry_values_to_set:
     keyPath: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
     valueType: dword
     valueData: 0
+    performanceAffecting: false
   - valueName: UpdatePromptSettings
     keyPath: HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint
     valueType: dword
     valueData: 0
+    performanceAffecting: false
   - valueName: FeatureSettingsOverride
     keyPath: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
     valueType: dword
     valueData: 0
+    performanceAffecting: true
   - valueName: FeatureSettingsOverrideMask
     keyPath: HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
     valueType: dword
     valueData: 3
+    performanceAffecting: true
+
 

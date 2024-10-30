@@ -9,14 +9,21 @@
         data: '{{ item.valueData }}'
         type: '{{ item.valueType }}'
       loop: '{{ registry_values_to_set }}'
-      register: loopresult
+      when: not item.performanceAffecting
 
     - name: pull a registry value
       ansible.windows.win_reg_stat:
         path: HKLM:\SOFTWARE\7-zip
         name: Path64
       register: statresult
+      when:
+        - ansible_facts.os_name == "Microsoft Windows Server 2019 Datacenter"
+        - ansible_facts.memtotal_mb > 1024
+        - '"Server 2019" in ansible_facts.os_name'
 
     - name: show that value
       ansible.builtin.debug:
         var: statresult.value
+      when: >
+        "Server 2019" in ansible_facts.os_name
+        or "Server 2022" in ansible_facts.os_name
