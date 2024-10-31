@@ -1,0 +1,41 @@
+---
+- name: users demo
+  hosts: Windows
+  tasks:
+    - name: create a user
+      ansible.windows.win_user:
+        name: alice
+        password: RedHat123@!
+        state: present
+        groups:
+          - Administrators
+          - Users
+          - Print Operators
+        groups_action: replace
+        fullname: Alice Aperson
+
+    - name: create a local group
+      ansible.windows.win_group:
+        name: Ansible Demo Watchers
+        state: present
+
+    - name: add users to that
+      ansible.windows.win_group_membership:
+        members:
+          - alice
+          - admin
+          - devops@EXAMPLE.COM
+        name: Ansible Demo Watchers
+        state: pure
+
+    - name: find a user profile
+      community.windows.win_user_profile:
+        username: alice
+        state: present
+      register: profileresult
+
+    - name: copy something to that profile
+      ansible.windows.win_copy:
+        content: Hello World
+        dest: '{{ profileresult.path }}\Desktop\file.txt'
+
