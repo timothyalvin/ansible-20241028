@@ -11,6 +11,7 @@
   hosts: webservers
   max_fail_percentage: 50
   roles:
+    - lean_delivery.java
     - web
 
 - name: Play to test
