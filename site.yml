@@ -1,0 +1,18 @@
+---
+- name: import registry.yml
+  import_playbook: registry.yml
+
+- name: import fail.yml
+  import_playbook: fail.yml
+
+- name: play in the middle
+  hosts: win1.example.com
+  tasks:
+    - name: test something before we continue
+      ansible.windows.win_ping:
+
+- name: import web.yml
+  import_playbook: web.yml
+  vars:
+    web_content: pass parameters
+
