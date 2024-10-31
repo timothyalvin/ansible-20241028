@@ -1,0 +1,7 @@
+      {{ web_content }}
+      The OS is {{ ansible_facts['os_name'] }}
+      Memory on this system {{ ansible_facts.memtotal_mb }}
+      Memory on this system {{ ansible_memtotal_mb }}
+      First IP address {{ ansible_facts['ip_addresses'][0] }}
+      First disk size {{ ansible_facts.disks[0].size }}
+      Inventory hostname is {{ inventory_hostname }}

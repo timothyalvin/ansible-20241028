@@ -9,21 +9,16 @@
 
 - name: Play to install IIS
   hosts: webservers
-  vars:
-    web_service: W3Svc
-    web_feature: Web-Server
-    web_index: index.html
   max_fail_percentage: 50
-  tasks:
-    - name: run web_tasks.yml
-      ansible.builtin.import_tasks: tasks/web_tasks.yml
+  roles:
+    - web
 
 - name: Play to test
   hosts: database
   tasks:
     - name: Test connectivity
       ansible.windows.win_uri:
-        url: http://{{ hostvars['win1.example.com']['ansible_facts']['ip_addresses'][0] }}
+        url: http://win1.example.com
         return_content: true
       register: uriresult
 
