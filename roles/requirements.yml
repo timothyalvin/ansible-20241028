@@ -1,3 +1,8 @@
 ---
 - src: lean_delivery.java
+  version: 7.2.1
 
+- src: https://github.com/timothyalvin/dbdemo
+  scm: git
+  version: e0f8b86
+  name: thurley.dbdemo
