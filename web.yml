@@ -16,6 +16,8 @@
 
 - name: Play to test
   hosts: database
+  roles:
+    - microsoft.sql.server
   tasks:
     - name: Test connectivity
       ansible.windows.win_uri:
