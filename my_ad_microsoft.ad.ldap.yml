@@ -1,0 +1,8 @@
+---
+plugin: microsoft.ad.ldap
+server: winad.example.com
+port: 389
+search_base: OU=Servers,DC=example,DC=com
+username: devops@EXAMPLE.COM
+password: D3vOps123!@
+auth_protocol: kerberos
