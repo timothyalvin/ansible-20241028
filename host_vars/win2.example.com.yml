@@ -1,3 +1,3 @@
 ---
-ansible_winrm_transport: basic
-ansible_host: 172.25.250.16
+#ansible_winrm_transport: basic
+#ansible_host: 172.25.250.16
