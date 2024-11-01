@@ -20,7 +20,7 @@
         triggers:
           - type: boot
           - type: daily
-            start_boundary: 2020-01-01T09:00:00
+            start_boundary: '2020-01-01T09:00:00'
         actions:
           - path: ping.exe
             arguments: winad.example.com
