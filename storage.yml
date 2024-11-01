@@ -3,7 +3,7 @@
   hosts: win1.example.com
   tasks:
     - name: initialize new disk
-      community.windows.win_initalize_disk:
+      community.windows.win_initialize_disk:
         disk_number: 1
 
     - name: make a parition
@@ -17,4 +17,3 @@
         drive_letter: T
         file_system: NTFS
 
-        
