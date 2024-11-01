@@ -25,8 +25,8 @@
         scope: global
         members:
           set:
-            - alice@EXAMPLE.COM
-            - devops@EXAMPLE.COM
-            - student@EXAMPLE.COM
+            - alice
+            - devops
+            - student
 
       

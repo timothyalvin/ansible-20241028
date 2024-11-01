@@ -1,0 +1,18 @@
+---
+- name: add or remove host from domain
+  hosts: win2.example.com
+  tasks:
+    - name: add or remove
+      microsoft.ad.membership:
+        dns_domain_name: EXAMPLE.COM
+        state: '{{ domain_join }}'
+        domain_admin_user: '{{ domain_user }}'
+        domain_admin_password: '{{ domain_password }}'
+      register: domainresult
+
+    - name: reboot if needed
+      ansible.windows.win_reboot:
+      when: domainresult.reboot_required
+  
+    
+
