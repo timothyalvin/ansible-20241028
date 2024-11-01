@@ -2,4 +2,4 @@
 collections:
   - name: community.windows
   - name: chocolatey.chocolatey
-  - name: microsoft.sql
+  - name: microsoft.ad
