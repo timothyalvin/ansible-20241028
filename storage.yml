@@ -10,7 +10,7 @@
       community.windows.win_partition:
         disk_number: 1
         drive_letter: T
-        partition_size: 500 MB
+        partition_size: -1
 
     - name: format that
       community.windows.win_format:
