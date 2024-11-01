@@ -1,0 +1,28 @@
+---
+- name: command modules
+  hosts: win1.example.com
+  tasks:
+    - name: run a command
+      ansible.windows.win_shell: dir
+      args:
+        chdir: c:\      
+    
+    - name: in a different dir
+      ansible.windows.win_shell: dir
+      args:
+        chdir: c:\windows
+
+    - name: schedule a task
+      community.windows.win_scheduled_task:
+        name: mytask
+        username: SYSTEM
+        state: present
+        triggers:
+          - type: boot
+          - type: daily
+            start_boundary: '2020-01-01T09:00:00'
+        actions:
+          - path: ping.exe
+            arguments: winad.example.com
+
+            
