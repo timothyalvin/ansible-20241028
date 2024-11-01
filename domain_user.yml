@@ -1,0 +1,32 @@
+---
+- name: domain users
+  hosts: winad.example.com
+  tasks:
+    - name: create alice user
+      microsoft.ad.user:
+        name: alice
+        firstname: Alice
+        surname: Aperson
+        password: RedHat123@!
+        state: present
+        path: CN=Users,DC=example,DC=com
+        groups:
+          add:
+            - Domain Users
+            - DnsAdmins
+        attributes:
+          set:
+            telephoneNumber: 123-4567
+        
+    - name: create AD group
+      microsoft.ad.group:
+        name: Ansible Demo Viewers
+        state: present
+        scope: global
+        members:
+          set:
+            - alice@EXAMPLE.COM
+            - devops@EXAMPLE.COM
+            - student@EXAMPLE.COM
+
+      
