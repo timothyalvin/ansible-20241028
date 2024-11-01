@@ -1,0 +1,14 @@
+---
+- name: dsc demo
+  hosts: Windows
+  tasks:
+    - name: install ps module
+      community.windows.win_psmodule:
+        name: AuditPolicyDsc
+        state: present
+
+    - name: invoke audit policy dsc
+      ansible.windows.win_dsc:
+        resource_name: AuditPolicyOption
+        Name: AuditBaseDirectories
+        Value: Enabled
