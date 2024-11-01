@@ -1,6 +1,7 @@
 [Windows]
 win1.example.com
 win2.example.com
+winad.example.com
 
 [webservers]
 win1.example.com
